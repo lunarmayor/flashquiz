@@ -7,3 +7,22 @@ FlashQuiz.module 'CardSet.Edit', (Edit, App) ->
     template: JST['backbone/modules/edit/templates/card_list']
     childView: CardView
     childViewContainer: 'ul'
+
+    events:
+      'click .new': 'toggleForm'
+      'click .create': 'createCard'
+
+    toggleForm: ->
+      @$el.find('form').toggle()
+      @$el.find('.new').toggle()
+      @$el.find('.question').focus() if @$el.find('form').is(':visible')
+
+    createCard: ->
+      question = @$el.find('.question').val()
+      answer = @$el.find('.answer').val()
+      
+      unless(answer is  '' or  question is '')
+        @collection.add(question: question, answer: answer)
+        @toggleForm()
+        @$el.find('textarea').val('')
+
