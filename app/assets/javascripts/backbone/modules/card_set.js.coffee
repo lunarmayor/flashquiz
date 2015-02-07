@@ -8,7 +8,7 @@ FlashQuiz.module 'CardSet', (CardSet, App) ->
     edit: ->
       new CardSet.Edit.Controller()
     show: ->
-      new CardSset.Show.Controller()
+      new CardSet.Show.Controller()
 
   App.addInitializer ->
     App.cardSetRouter = new CardSet.Router(controller: API)

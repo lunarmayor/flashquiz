@@ -14,6 +14,10 @@ FlashQuiz.module 'CardSet.Edit', (Edit, App) ->
     events:
       'click .new': 'toggleForm'
       'click .create': 'createCard'
+      'click .play': 'startGame'
+
+    startGame: ->
+      App.cardSetRouter.navigate('play', trigger: true)
 
     toggleForm: ->
       @$el.find('form').toggle()
