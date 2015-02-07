@@ -1,5 +1,5 @@
-<div>Score: <%= totalPoints %></div>
-<div>High Score: <%= high_score %></div>
+<div>Score: <%= Math.floor(totalPoints) %></div>
+<div>High Score: <%= Math.floor(high_score) %></div>
 <% if(totalPoints === high_score) { %>
   <div>New High Score!</div>
 <% } %>

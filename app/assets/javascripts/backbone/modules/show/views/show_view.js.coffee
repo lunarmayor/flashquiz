@@ -4,10 +4,14 @@ FlashQuiz.module 'CardSet.Show', (Show, App) ->
    events:
      'click .start': 'startGame'
      'keyup input': 'submit'
+     'click .edit': 'goToEdit'
 
    ui:
      gamespace: '.card.large'
      answerBar: '.answer-bar input'
+
+   goToEdit: ->
+     App.cardSetRouter.navigate('', trigger: true)
 
    startGame: ->
      @activeCard = false
