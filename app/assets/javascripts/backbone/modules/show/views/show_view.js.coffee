@@ -41,28 +41,54 @@ FlashQuiz.module 'CardSet.Show', (Show, App) ->
 
     submit: (e) =>
       if e.which is 13 and @activeCard
+        @activeCard = false
         if @currentCard.get('answer') is @ui.answerBar.val()
           @ui.answerBar.css('color': 'green')
           @stopTime = Date.now()
-          #@calculateCardScore()
+          @calculateCardScore()
           @checkForGameEnd()
         else
           @addX()
           @ui.answerBar.val('')
+          @activeCard = true
           @numberOfTries += 1
           if @numberOfTries > 2
             @checkForGameEnd()
     
     checkForGameEnd: ->
+      @activeCard = false
       @clearTries()
       @currentCardNumber += 1
       if @currentCardNumber >= @cards.length
         @endGame()
       else
         @startCountdown()
-      
+
     clearTries: ->
+      @numberOfTries = 0
       @$el.find('.tries').text('')
     
     addX: ->
       @$el.find('.tries').append('x')
+    
+    calculateCardScore: ->
+      tryMultiplier = 1 - .25 * @numberOfTries
+      timeElapsed = (@stopTime - @startTime) / 1000
+      timeMultiplier = if timeElapsed <= 10
+                         1
+                       else if timeElapsed <= 20
+                         0.9
+                       else if timeElapsed <= 30
+                         0.8
+                       else
+                         0.75
+
+       @totalPoints += (100 / @cards.length) * tryMultiplier * timeMultiplier
+       @$el.find('.total-points').text(Math.floor(@totalPoints, 2))
+
+    endGame: ->
+      if @model.get('high_score') < @totalPoints
+        @model.set('high_score', @totalPoints)
+      
+      attributes = _.extend(@model.attributes, {totalPoints: @totalPoints})
+      @ui.gamespace.html(JST['backbone/modules/show/templates/results'](attributes))
