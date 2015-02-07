@@ -15,3 +15,33 @@ h2
 h3
   font-size: 20px
   margin-bottom: 20px
+.card, textarea
+  height: 70px
+  width: 150px
+  padding: 20px
+.card
+  display: table-cell
+  vertical-align: middle
+  text-align: center 
+  .card-containter > &
+    background: white
+    border: 1px solid gray
+  &.new
+    border: 1px dashed gray
+    height: 40px
+    cursor: pointer
+    transition: background 1s
+    &:hover
+      background: wheat
+.card-form
+  display: none
+.btn
+  padding: 6px 10px
+  background: rgb(255, 152, 152)
+  font-size: 16px
+  cursor: pointer
+.play
+  margin-left: 20px
+textarea
+  resize: none
+  margin-right: -5px

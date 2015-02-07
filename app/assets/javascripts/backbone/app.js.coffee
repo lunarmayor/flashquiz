@@ -1,5 +1,5 @@
 @FlashQuiz = do (Backbone, Marionette) ->
-  App = new Marionette.Applicaiton
+  App = new Marionette.Application
 
   App.addRegions
     mainRegion: 'main'
