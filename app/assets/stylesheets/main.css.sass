@@ -24,6 +24,7 @@ h3
   padding: 20px
 .card
   display: table-cell
+  position: relative
   vertical-align: middle
   text-align: center 
   .card-container > &
@@ -36,6 +37,12 @@ h3
     transition: background 1s
     &:hover
       background: wheat
+.destroy
+  position: absolute
+  color: rgb(218, 0, 0) 
+  top: 5px
+  right: 8px
+  cursor: pointer
 .card-form
   display: none
 .btn
@@ -51,3 +58,6 @@ h3
 textarea
   resize: none
   margin-right: -5px
+
+.actions
+  padding-bottom: 70px

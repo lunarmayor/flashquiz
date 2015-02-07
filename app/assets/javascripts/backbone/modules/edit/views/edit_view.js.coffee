@@ -2,6 +2,9 @@ FlashQuiz.module 'CardSet.Edit', (Edit, App) ->
   class CardView extends Marionette.ItemView
     className: 'card-container'
     template: JST['backbone/modules/edit/templates/card']
+    
+    events:
+      'click .destroy': -> @model.destroy()
 
   class Edit.View extends Marionette.CompositeView
     template: JST['backbone/modules/edit/templates/card_list']
