@@ -40,8 +40,7 @@ FlashQuiz.module 'CardSet.Show', (Show, App) ->
       @currentCard = @cards[@currentCardNumber]
       @$el.find('.card').text(@currentCard.get('question'))
       @startTime = Date.now()
-      @ui.answerBar.css(color: 'black').val('')
-      @ui.answerBar.focus()
+      @ui.answerBar.css(color: 'black').val('').focus()
 
     submit: (e) =>
       if e.which is 13 and @activeCard
@@ -94,5 +93,7 @@ FlashQuiz.module 'CardSet.Show', (Show, App) ->
       if @model.get('high_score') < @totalPoints
         @model.set('high_score', @totalPoints)
       
+      @$el.find('.total-points').text(0)
+
       attributes = _.extend(@model.attributes, {totalPoints: @totalPoints})
       @ui.gamespace.html(JST['backbone/modules/show/templates/results'](attributes))
